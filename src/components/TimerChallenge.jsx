@@ -1,4 +1,5 @@
 const TimerChallenge = ({ title, targetTime }) => {
+  const timer = 123;
   return (
     <section className="challenge">
       <h2>{title}</h2>
