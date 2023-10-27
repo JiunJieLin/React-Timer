@@ -12,10 +12,13 @@ const TimerChallenge = ({ title, targetTime }) => {
   //手動stop如果時間到了，把預設秒數加回去
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
-    setTimeRemaining(targetTime * 1000);
+
     dialog.current.open();
   }
 
+  const handleReset = () => {
+    setTimeRemaining(targetTime * 1000);
+  };
   //setInterval會一直跑不會停止
   const handleStart = () => {
     timer.current = setInterval(() => {
@@ -30,7 +33,12 @@ const TimerChallenge = ({ title, targetTime }) => {
 
   return (
     <>
-      <ResultModal ref={dialog} result="lost" targetTime={targetTime} />
+      <ResultModal
+        ref={dialog}
+        targetTime={targetTime}
+        remainingTime={timeRemaining}
+        onReset={handleReset}
+      />
       <section className="challenge">
         <h2>{title}</h2>
         <p className="challenge-time">
